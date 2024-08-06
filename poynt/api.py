@@ -106,7 +106,7 @@ class API(object):
 
         headers = self._request_headers()
         method = method or 'GET'
-        url_root = self.web_root if app is 'WEB' else self.api_root
+        url_root = self.web_root if app == 'WEB' else self.api_root
 
         if form:
             r = self.session.request(
@@ -207,7 +207,7 @@ class API(object):
             app=app,
         )
 
-        if status_code == 401 and json is not None and json['code'] is 'INVALID_ACCESS_TOKEN':
+        if status_code == 401 and json is not None and json['code'] == 'INVALID_ACCESS_TOKEN':
             return self.request(
                 method=method,
                 url=url,
